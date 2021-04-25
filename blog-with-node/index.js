@@ -2,6 +2,8 @@ const express = require('express')
 const app = new express()
 const { config, engine } = require('express-edge')
 const path = require('path')
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/node-js-blog-dbtest', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
 app.use(express.static('public'))
 app.use(engine)
