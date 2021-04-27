@@ -1,2 +1,1 @@
-# code_learning
-## Personal repository for coding experiences
+# Personal repository in code experiences
