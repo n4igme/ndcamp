@@ -35,3 +35,7 @@ const createUserController = require('./controllers/createUser')
 app.get('/user/register', createUserController);
 const storeUserController = require('./controllers/storeUser')
 app.post('/user/store', storeUserController);
+const loginController = require('./controllers/login')
+app.get('/user/login', loginController)
+const loginAuthController = require('./controllers/loginAuth')
+app.post('/user/auth', loginAuthController)
