@@ -35,6 +35,8 @@ app.listen(4000, () => {
 const storePost = require('./middleware/storePost')
 //app.use('/post/store', storePost)
 const auth = require('./middleware/auth')
+const connectFlash = require('connect-flash')
+app.use(connectFlash())
 
 const homePageController = require('./controllers/homePage')
 app.get('/', homePageController);
