@@ -8,7 +8,7 @@ app.set('views', `${__dirname}/views`)
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
-const { config, engine } = require('express-edge')
+const { engine } = require('express-edge')
 app.use(engine)
 
 const bodyParser = require('body-parser')
@@ -70,5 +70,5 @@ app.post('/user/auth', ifAuth, loginAuthController)
 app.use((req, res) => res.render('404'))
 
 app.listen(process.env.PORT, () => {
-    console.log(`'App listening on port ${process.env.PORT}'`)
+    console.log(`App listening on port ${process.env.PORT}`)
 })
