@@ -6,6 +6,7 @@ module.exports = (req, res) => {
             const registrationErrors = Object.keys(error.errors).map(key => error.errors[key].message)
             //req.session.registrationErrors = registrationErrors
             req.flash('registrationErrors', registrationErrors)
+            req.flash('data', req.body)
             return res.redirect('/user/register')
         }
         res.redirect('/');
