@@ -1,10 +1,12 @@
+require('dotenv').config()
+//console.log(process.env)
 const express = require('express')
 const app = new express()
 app.use(express.static('public'))
 app.set('views', `${__dirname}/views`)
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/node-js-blog', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(process.env.DB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
 const { config, engine } = require('express-edge')
 app.use(engine)
@@ -18,9 +20,9 @@ app.use(fileUpload())
 
 const cloudinary = require('cloudinary')
 cloudinary.config({
-    api_key: '817722266569354',
-    api_secret: 'KRf-K5xG_na_hkYGSEEjxVY8o14',
-    cloud_name: 'n4igme'
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_NAME
 })
 
 //store session
@@ -31,7 +33,7 @@ app.use(expressSession({
      resave: true,
      saveUninitialized: true,
      store: connectMongo.create({
-        mongoUrl: 'mongodb://localhost/node-js-blog'
+        mongoUrl: process.env.DB_URI
      })
 }))
 
@@ -67,6 +69,6 @@ const loginAuthController = require('./controllers/loginAuth')
 app.post('/user/auth', ifAuth, loginAuthController)
 app.use((req, res) => res.render('404'))
 
-app.listen(4000, () => {
-    console.log('App listening on port 4000')
+app.listen(process.env.PORT, () => {
+    console.log(`'App listening on port ${process.env.PORT}'`)
 })
