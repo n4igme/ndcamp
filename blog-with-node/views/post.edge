@@ -10,7 +10,7 @@
             <h1>{{ post.title }}</h1>
             <h2 class="subheading">{{ post.description }}</h2>
             <span class="meta">Posted by
-              <a href="#">{{ post.username }}</a>
+              <a href="#">{{ post.author.username }}</a>
               on {{ post.createdAt.toDateString() }}</span>
           </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {{ post.content }}
+          {{{ post.content }}}
         </div>
       </div>
     </div>
