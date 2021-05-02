@@ -8,8 +8,8 @@ app.set('views', `${__dirname}/views`)
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 
-const { engine } = require('express-edge')
-app.use(engine)
+const expressEdge = require('express-edge')
+app.use(expressEdge)
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -42,7 +42,7 @@ app.use(connectFlash())
 
 const edge = require('edge.js')
 app.use('*', (req, res, next) => {
-    //edge.global('auth', req.session.userId)
+    edge.global('auth', req.session.userId)
     next()
 })
 
@@ -67,6 +67,8 @@ const loginController = require('./controllers/login')
 app.get('/user/login', ifAuth, loginController)
 const loginAuthController = require('./controllers/loginAuth')
 app.post('/user/auth', ifAuth, loginAuthController)
+const logout = require('./controllers/logout')
+app.get('/user/logout', logout)
 app.use((req, res) => res.render('404'))
 
 app.listen(process.env.PORT, () => {
