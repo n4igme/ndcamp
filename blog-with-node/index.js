@@ -1,5 +1,4 @@
 require('dotenv').config()
-//console.log(process.env)
 const express = require('express')
 const app = new express()
 app.use(express.static('public'))
@@ -47,7 +46,6 @@ app.use('*', (req, res, next) => {
 })
 
 const storePost = require('./middleware/storePost')
-//app.use('/post/store', storePost)
 const mustAuth = require('./middleware/mustAuth')
 const ifAuth = require('./middleware/ifAuth')
 
