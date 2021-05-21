@@ -1,0 +1,77 @@
+  .bg-white {
+    background-color: #ffffff;
+  }
+
+  /* Remove the navbar's default margin-bottom and rounded borders */ 
+  .navbar {
+    margin-bottom: 0;
+    background-color: #f4511e;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+  }
+
+  .navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+  }
+
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #f4511e !important;
+    background-color: #fff !important;
+  }
+
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+  }
+
+  .jumbotron { 
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+    background-size: cover;
+    padding: 100px 15px;
+    opacity: 0.95;
+  }
+  
+  /* Remove border and add padding to thumbnails */
+  .thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .thumbnail p {
+    margin-top: 15px;
+    color: #555;
+  }
+
+  /* Black buttons with extra padding and without rounded borders */
+  .btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #f1f1f1;
+    border-radius: 0;
+    transition: .2s;
+  }
+
+  /* On hover, the color of .btn will transition to white with black text */
+  .btn:hover, .btn:focus {
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #000;
+  }
+
+  /* Set black background color, white text and some padding */
+  footer {
+    background-color: #564a4a;
+    color: white;
+    padding: 15px;
+  }
+
+  /* On small screens, set height to 'auto' for grid */
+  @media screen and (max-width: 767px) {
+    .row.content {height: auto;} 
+  }

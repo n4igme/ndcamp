@@ -1,33 +1,18 @@
 @layout('layouts.app')
+@section('header')
+<div class="jumbotron" style="background-image: url('{{ post.image }}')">
+  <div class="container text-center">
+    <h1>{{ post.title }}</h1>      
+    <p>{{ post.description }}</p>
+  </div>
+</div>
+@endsection
 @section('content')
-  <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{ post.image }}')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
-            <h1>{{ post.title }}</h1>
-            <h2 class="subheading">{{ post.description }}</h2>
-            <span class="meta">Posted by
-              <a href="#">{{ post.author.username }}</a>
-              on {{ post.createdAt.toDateString() }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <!-- Post Content -->
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          {{{ post.content }}}
-        </div>
-      </div>
-    </div>
-  </article>
-
+  <div class="col-sm-9 text-left">
+    <h5><span class="glyphicon glyphicon-time"></span> Posted by <a href="#">{{ post.author.username }}</a>, on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
+    <p>{{{ post.content }}}</p>
+    <hr>
+  </div>
   <hr>
 @endsection
