@@ -56,7 +56,9 @@ app.get('/post/new', mustAuth, createPostController);
 const storePostController = require('./controllers/storePost')
 app.post('/post/store', mustAuth, storePost, storePostController);
 const getPostController = require('./controllers/getPost')
-app.get('/posts/:id', getPostController);
+app.get('/post/:id', getPostController);
+const byCategory = require('./controllers/byCategory')
+app.get('/post/categories/:category', byCategory);
 const createUserController = require('./controllers/createUser')
 app.get('/user/register', ifAuth, createUserController);
 const storeUserController = require('./controllers/storeUser')
