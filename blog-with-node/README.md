@@ -8,4 +8,5 @@ Learn to build fullstack web applications with the most popular server side fram
 4. `npm start`
 
 ## Credit to 
-[Start Bootstrap](https://startbootstrap.com/theme/clean-blog)
+[Cloudinary](https://cloudinary.com/)
+[Udemy](https://www.udemy.com/course/node-js-mongo-db-2018/)

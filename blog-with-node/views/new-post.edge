@@ -6,7 +6,7 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1>New Post</h1>      
-    <p></p>
+    <p>Just simple blog with NodeJS</p>
   </div>
 </div>
 @endsection
@@ -22,8 +22,15 @@
       </div>
       <div class='control-group'>
         <div class='form-group floating-label-form-group controls'>
-          <label>Description</label>
-          <input type='text' name='description' placeholder='Description' class='form-control'>
+          <label for='category'>Category</label>
+            <select name="category" id="category" class="form-control">
+              <option>News</option>
+              <option>Experience</option>
+              <option>Journey</option>
+              <option>Experiment</option>
+              <option>Paper</option>
+              <option>Narration</option>
+            </select>
         </div>
       </div>
       <div class='control-group'>

@@ -1,9 +1,9 @@
 @layout('layouts.app')
 @section('header')
-<div class="jumbotron">
+<div class="jumbotron" style="background-color: #564a4a; padding: 50px 15px; opacity: 0.75;">
   <div class="container text-center">
-    <h1>Login</h1>      
-    <p>Just simple blog with NodeJS</p>
+    <h1>Login</h1>  
+    <p>Just simple blog with NodeJS</p>    
   </div>
 </div>
 @endsection
@@ -11,7 +11,7 @@
 <div class="container text-left">
   <div class="col-sm-2"></div>
   <div class="col-sm-3">
-    <form action='/user/auth' method='POST' encType='multipart/form-data'>           
+    <form class="form-horizontal" action='/user/auth' method='POST' encType='multipart/form-data'>           
       <div class='control-group'>
         <div class='form-group floating-label-form-group controls'>
           <label>Email</label>

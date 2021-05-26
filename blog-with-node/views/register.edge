@@ -1,9 +1,9 @@
 @layout('layouts.app')
 @section('header')
-<div class="jumbotron">
+<div class="jumbotron" style="background-color: #564a4a; padding: 50px 15px; opacity: 0.75;">
   <div class="container text-center">
-    <h1>Register</h1>      
-    <p>Just simple blog with NodeJS</p>
+    <h1>Register</h1>  
+    <p>Just simple blog with NodeJS</p>    
   </div>
 </div>
 @endsection
@@ -19,7 +19,7 @@
             @endeach
           </ul>
         @endif
-        <form action='/user/store' method='POST' encType='multipart/form-data'>           
+        <form class="form-horizontal" action='/user/store' method='POST' encType='multipart/form-data'>           
           <div class='control-group'>
             <div class='form-group floating-label-form-group controls'>
               <label>Username</label>
@@ -38,7 +38,7 @@
           </div>
           <hr>
           <div class='form-group my-4 text-right'>
-            <button class='btn btn-primary'>Register Now</button>
+            <button class='btn btn-primary'>Register</button>
           </div>
         </form>
   </div>

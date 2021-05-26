@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 ///Users, Post, Products
 const PostSchema = new mongoose.Schema({
     title: String,
-    description: String,
+    category: String,
     content: String,
     //username: String,
     author: {
