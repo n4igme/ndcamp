@@ -10,7 +10,7 @@
 @section('content')
   <!-- Post Content -->
   <div class="col-sm-9 text-left">
-    <h5><span class="glyphicon glyphicon-time"></span> Posted by <a href="#">{{ post.author.username }}</a>, on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
+    <h5><span class="glyphicon glyphicon-time"></span> Posted by <a href="/posts/by/{{ post.author._id }}">{{ post.author.username }}</a>, on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
     <p>{{{ post.content }}}</p>
     <hr>
   </div>

@@ -20,7 +20,7 @@
           <img src="{{ post.image }}">
           <h3><strong>{{ post.title }}</strong></h3>
           <h5><span class="glyphicon glyphicon-time"></span> Posted by
-            <a href="#">{{ post.author.username }}</a>,
+            <a href="/posts/by/{{ post.author._id }}">{{ post.author.username }}</a>,
             on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
           <div align="right"><a href="/post/{{ post._id }}" class="btn btn-info" role="button">Read More</a></div>
         </div>

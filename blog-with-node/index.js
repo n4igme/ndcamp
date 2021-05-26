@@ -57,8 +57,10 @@ const storePostController = require('./controllers/storePost')
 app.post('/post/store', mustAuth, storePost, storePostController);
 const getPostController = require('./controllers/getPost')
 app.get('/post/:id', getPostController);
-const byCategory = require('./controllers/byCategory')
-app.get('/post/categories/:category', byCategory);
+const postsCategory = require('./controllers/postsCategory')
+app.get('/posts/category/:category', postsCategory);
+const postsBy = require('./controllers/postsBy')
+app.get('/posts/by/:id', postsBy);
 const createUserController = require('./controllers/createUser')
 app.get('/user/register', ifAuth, createUserController);
 const storeUserController = require('./controllers/storeUser')
