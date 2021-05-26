@@ -1,2 +1,2 @@
-# UI/UX from Scratch
+# Sample UI/UX from Scratch
 Build templates for web application
