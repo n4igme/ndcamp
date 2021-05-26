@@ -12,20 +12,21 @@
   <h4><small>RECENT POSTS</small></h4>
   <hr>
 </div>
-<div class="container text-left">
-  @each(post in posts)
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <img src="{{ post.image }}">
-        <h3><strong>{{ post.title }}</strong></h3>
-        <h5><span class="glyphicon glyphicon-time"></span> Posted by
-          <a href="#">{{ post.author.username }}</a>,
-          on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
-        <p></p> 
-        <div align="right"><a href="/posts/{{ post._id }}" class="btn btn-info" role="button">Read More</a></div>
+<div class="col-sm-9 text-left">
+  <div class="row">
+    @each(post in posts)
+      <div class="col-sm-4">
+        <div class="thumbnail">
+          <img src="{{ post.image }}">
+          <h3><strong>{{ post.title }}</strong></h3>
+          <h5><span class="glyphicon glyphicon-time"></span> Posted by
+            <a href="#">{{ post.author.username }}</a>,
+            on {{ post.createdAt.toDateString().split(' ').slice(1).join(' ') }}</h5>
+          <div align="right"><a href="/posts/{{ post._id }}" class="btn btn-info" role="button">Read More</a></div>
+        </div>
       </div>
-    </div>
-  @endeach
+    @endeach
+  </div>
 </div>
 <div class="container-fluid text-center">                
   <ul class="pagination">

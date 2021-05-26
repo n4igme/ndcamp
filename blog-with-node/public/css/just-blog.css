@@ -36,16 +36,29 @@
     opacity: 0.95;
   }
   
+  .row.content {height: 100%}
+
+  .sidenav {
+    background-color: #fff;
+    height: 100%;
+  }
+  
   /* Remove border and add padding to thumbnails */
   .thumbnail {
     padding: 0 0 15px 0;
-    border: none;
+    height: 300px;
+    border: 0;
     border-radius: 0;
   }
 
   .thumbnail p {
     margin-top: 15px;
     color: #555;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 150px;
   }
 
   /* Black buttons with extra padding and without rounded borders */
@@ -73,5 +86,11 @@
 
   /* On small screens, set height to 'auto' for grid */
   @media screen and (max-width: 767px) {
+    .sidenav {
+      height: auto;
+      padding: 15px;
+    }
     .row.content {height: auto;} 
+    .thumbnail {height: auto;}
+    .thumbnail img {height: auto;}
   }
