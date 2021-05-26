@@ -1,1 +1,2 @@
-# Scratch UI for Web Application
+# UI/UX from Scratch
+Build templates for web application

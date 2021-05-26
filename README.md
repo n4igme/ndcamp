@@ -1,1 +1,3 @@
 # Personal Code Experiences
+Keep learning, keep doing...
+The repository of my personal code experiences
