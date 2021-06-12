@@ -79,8 +79,12 @@
 <script>
   function srchFunction() {
     var x = document.getElementById("txtSearch");
-    var url = "/search/post/" + x.value;
-    window.location.href = url;
+    if(x.value != ""){
+      var url = "/search/post/" + x.value;
+      window.location.href = url;
+    } else {
+      window.location.href = "/";
+    }
   }
 </script>
 @!section('script')
