@@ -1,5 +1,6 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/node-js-blog-dbtest', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(process.env.DB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
 const Post = require('./database/models/Post')
 
 // Post.create({
@@ -10,11 +11,13 @@ const Post = require('./database/models/Post')
 //      console.log(error, post)
 // })
 
-//  Post.find({
-//     title: "Title five"
-//  }, (error, post) => {
-//     console.log(error, post)
-// })
+var q = "Play"
+Post.find({
+    //$text: { $search: q }
+    title: {$regex: new RegExp(q)}
+}, (error, post) => {
+    console.log(error, post)
+})
 
 // Post.findById('60850e7f2d13cb29c54eacd4', (error, post) => {
 //     console.log(error, post)
@@ -28,6 +31,21 @@ const Post = require('./database/models/Post')
 //     console.log(error, post)
 // })
 
-Post.findByIdAndDelete('60850ec2e1358b29dde4dae8', (error, post) => {
-     console.log(error, post)
-})
+// Post.findByIdAndDelete('60850ec2e1358b29dde4dae8', (error, post) => {
+//      console.log(error, post)
+// })
+
+// Post.paginate({}, { page: 2, limit: 10 })
+//   .then(response => {
+//     /**
+//      * Response looks like:
+//      * {
+//      *   docs: [...] // array of Posts
+//      *   total: 42   // the total number of Posts
+//      *   limit: 10   // the number of Posts returned per page
+//      *   page: 2     // the current page of Posts returned
+//      *   pages: 5    // the total number of pages
+//      * }
+//     */
+//   })
+//   .catch(handleQueryError);

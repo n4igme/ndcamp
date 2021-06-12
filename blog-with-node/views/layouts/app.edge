@@ -44,9 +44,9 @@
 
     <div class="col-sm-3 well bg-white sidenav">
       <div class="input-group well">
-        <input type="text" class="form-control" placeholder="Search..">
+        <input type="search" id="txtSearch" class="form-control" placeholder="Search.." onsearch="srchFunction()">
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
+          <button id="srchBtn" class="btn btn-default" type="button" onclick="srchFunction()">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </span>
@@ -76,6 +76,13 @@
   </div>
 </footer>
 
+<script>
+  function srchFunction() {
+    var x = document.getElementById("txtSearch");
+    var url = "/search/post/" + x.value;
+    window.location.href = url;
+  }
+</script>
 @!section('script')
 
 </body>
