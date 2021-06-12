@@ -3,7 +3,7 @@ module.exports = async (req, res) => {
     console.log(req.params)
     const posts = await Post.find({
         "category" : req.params.category
-    }).populate('author');
+    }).populate('author').sort('-createdAt');
     res.render('index', {
         posts
     })
