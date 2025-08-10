@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6.0
+    container_name: blog_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/backup:/backup
+    networks:
+      - blog_network
+
+  # Node.js Blog Application
+  blog_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: blog_app
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DB_URI: mongodb://admin:password123@mongodb:27017/blog_db?authSource=admin
+      SESSION_SECRET: your_super_secure_session_secret_change_this
+      CLOUDINARY_API_KEY: your_cloudinary_api_key
+      CLOUDINARY_API_SECRET: your_cloudinary_api_secret
+      CLOUDINARY_NAME: your_cloudinary_name
+    volumes:
+      # Mount source code for hot reload during development
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      # Mount uploads directory
+      - uploads_data:/usr/src/app/uploads
+    networks:
+      - blog_network
+    command: npm start
+
+  # Redis for Session Storage (Optional - better than MongoDB for sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: blog_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - blog_network
+    command: redis-server --appendonly yes
+
+volumes:
+  mongodb_data:
+    driver: local
+  uploads_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  blog_network:
+    driver: bridge

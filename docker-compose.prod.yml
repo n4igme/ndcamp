@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # MongoDB Database for Production
+  mongodb:
+    image: mongo:6.0
+    container_name: blog_mongodb_prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - mongodb_prod_data:/data/db
+      - ./database/backup:/backup:ro
+    networks:
+      - blog_prod_network
+    # Don't expose ports directly in production - use reverse proxy
+    ports:
+      - "127.0.0.1:27017:27017"
+    command: mongod --auth
+
+  # Node.js Blog Application Production
+  blog_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: blog_app_prod
+    restart: always
+    depends_on:
+      - mongodb
+      - redis
+    ports:
+      - "127.0.0.1:3000:3000"  # Bind to localhost only
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_URI: mongodb://${MONGO_USERNAME:-admin}:${MONGO_PASSWORD}@mongodb:27017/blog_prod?authSource=admin
+      SESSION_SECRET: ${SESSION_SECRET}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      CLOUDINARY_NAME: ${CLOUDINARY_NAME}
+      REDIS_URL: redis://redis:6379
+    volumes:
+      - uploads_prod_data:/usr/src/app/uploads
+    networks:
+      - blog_prod_network
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # Redis for Session Storage - Production
+  redis:
+    image: redis:7-alpine
+    container_name: blog_redis_prod
+    restart: always
+    volumes:
+      - redis_prod_data:/data
+    networks:
+      - blog_prod_network
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    sysctls:
+      net.core.somaxconn: 1024
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: blog_nginx_prod
+    restart: always
+    depends_on:
+      - blog_app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_cache:/var/cache/nginx
+    networks:
+      - blog_prod_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongodb_prod_data:
+    driver: local
+  uploads_prod_data:
+    driver: local
+  redis_prod_data:
+    driver: local
+  nginx_cache:
+    driver: local
+
+networks:
+  blog_prod_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
