@@ -242,4 +242,4 @@ docker exec -it blog_mongodb mongotop
 
 ## License
 
-This project is for educational purposes as part of a Node.js bootcamp.
+This project is for educational purposes as part of a [Node.js bootcamp](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/).
